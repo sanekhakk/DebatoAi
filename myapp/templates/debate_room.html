@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Debate Room - {{ debate.topic.title }} - Debato{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/debate_room.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="debate-room-section">
+    <div class="debate-container">
+        <div class="debate-header">
+            <div class="debate-info">
+                <h1 class="debate-topic">{{ debate.topic.title }}</h1>
+                <p class="debate-description">{{ debate.topic.description }}</p>
+                <div class="debate-meta">
+                    <span class="difficulty {{ debate.difficulty_level }}">{{ debate.difficulty_level|title }}</span>
+                    <span class="category">{{ debate.topic.category.name }}</span>
+                    <span class="time-limit">{{ debate.total_time_limit }}min total</span>
+                </div>
+            </div>
+            
+            <div class="debate-controls">
+                <div class="timer-container">
+                    <div class="main-timer">
+                        <span class="timer-label">Total Time</span>
+                        <span class="timer-display" id="main-timer-display">{{ debate.total_time_limit }}:00</span>
+                    </div>
+                    <div class="reply-timer" id="reply-timer">
+                        <span class="timer-label">Your Turn</span>
+                        <span class="timer-display" id="reply-timer-display">{{ debate.reply_time_limit }}</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-outline" id="give-up-btn">Give Up</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="messages-container" id="messages-container">
+                {% if debate.status == 'setup' %}
+                <div class="welcome-message" id="welcome-message">
+                    <div class="ai-avatar-large">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Welcome to the Debate Arena!</h3>
+                    <p>Topic: <strong>{{ debate.topic.title }}</strong></p>
+                    <div class="topic-highlight">{{ debate.topic.description }}</div>
+                    <p class="instructions">Ready to begin? Click the button below to start your debate!</p>
+                    <button class="btn btn-primary btn-lg" id="start-debate-btn">
+                        <i class="fas fa-play"></i> Start Debate
+                    </button>
+                </div>
+                {% endif %}
+                </div>
+            
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="message-input" 
+                        placeholder="{% if debate.status == 'setup' %}Click 'Start Debate' first...{% else %}Type your argument here...{% endif %}"
+                        rows="3"
+                        {% if debate.status == 'setup' %}disabled{% endif %}
+                    ></textarea>
+                    <button class="btn btn-primary" id="send-btn" {% if debate.status == 'setup' %}disabled{% endif %}>
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{ debate_data|json_script:"debate-data" }}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/debate_room.js' %}" defer></script>
+{% endblock %}

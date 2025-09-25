@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - Debato{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="dashboard-welcome">
+                <h1 class="dashboard-title">Welcome back, {{ user.username }}!</h1>
+                <p class="dashboard-subtitle">Here's your performance summary. Ready for the next challenge?</p>
+            </div>
+            <a href="{% url 'debate_setup' %}" class="btn btn-primary">
+                <i class="fas fa-comments"></i>
+                Start New Debate
+            </a>
+        </div>
+
+        <div class="main-content-grid">
+            
+            <div class="left-column">
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon trophy">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">{{ scoreboard.user_wins }}</div>
+                            <div class="stat-label">Your Wins</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon brain">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">{{ scoreboard.ai_wins }}</div>
+                            <div class="stat-label">AI Wins</div>
+                        </div>
+                    </div>
+
+                    <div class="win-rate-card">
+                        <div class="stat-icon calendar" style="margin-bottom: 1rem; font-size: 2.5rem; width: 70px; height: 70px;">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-info" style="text-align: center;">
+                            <div class="win-rate-text" style="position: static; transform: none; font-size: 2.25rem;">{{ scoreboard.total_debates }}</div>
+                            <div class="win-rate-label" style="margin-top: 0.5rem;">Total Debates</div>
+                        </div>
+                    </div>
+                    <div class="win-rate-card">
+                        <div class="win-rate-progress">
+                            <div class="win-rate-text" id="winRateText">{{ scoreboard.win_rate|floatformat:0 }}%</div>
+                        </div>
+                        <div class="win-rate-label">Your Win Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <h2 class="dashboard-section-title"><i class="fas fa-history"></i> Recent Debate History</h2>
+                <div class="debate-history-container">
+                    {% if recent_debates %}
+                    <table class="debate-history-table">
+                        <thead>
+                            <tr>
+                                <th>Topic</th>
+                                <th>Difficulty</th>
+                                <th>Result</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for debate in recent_debates %}
+                            <tr>
+                                <td>{{ debate.topic.title }}</td>
+                                <td>{{ debate.difficulty_level|title }}</td>
+                                <td>
+                                    {% if debate.winner == 'user' %}
+                                        <span class="status-badge status-win"><i class="fas fa-check-circle"></i> Win</span>
+                                    {% else %}
+                                        <span class="status-badge status-loss"><i class="fas fa-times-circle"></i> Loss</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ debate.ended_at|date:"F j, Y" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="dashboard-card">
+                        <p class="text-secondary">You haven't completed any debates yet. Click "Start New Debate" to begin!</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div> </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const winRate = parseFloat("{{ scoreboard.win_rate|default:0 }}");
+    const circle = document.getElementById('winRateCircle');
+    if (circle) {
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (winRate / 100) * circumference;
+
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = circumference;
+        setTimeout(() => {
+            circle.style.strokeDashoffset = offset;
+        }, 100);
+    }
+});
+</script>
+{% endblock %}

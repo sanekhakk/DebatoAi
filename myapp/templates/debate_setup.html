@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Setup Your Debate - Debato{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/debate_setup.css' %}">
+{% endblock %}
+<style>
+.topics-grid .topic-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+.category-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+.topics-loading.hidden {
+    display: none !important;
+}
+
+.topic-card .topic-difficulty,
+.topic-card .topic-title + * { 
+    display: none;
+}
+
+.topic-card {
+    justify-content: center !important;
+    align-items: center;
+    text-align: center;
+}
+</style>
+
+{% block content %}
+<section class="setup-section">
+    <div class="setup-container">
+        <div class="back-nav">
+            <a href="{% url 'landing' %}" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+        </div>
+
+        <div class="setup-header">
+            <div class="setup-icon">
+                <i class="fas fa-cogs"></i>
+            </div>
+            <h1 class="setup-title">Setup Your Debate</h1>
+            <p class="setup-subtitle">Choose your battlefield and let the intellectual combat begin!</p>
+        </div>
+
+        <div class="setup-form-container">
+            <form id="debate-setup-form" class="setup-form">
+                {% csrf_token %}
+                
+                <div class="setup-step active" id="step-1">
+                    <div class="step-header">
+                        <span class="step-number">1</span>
+                        <h2 class="step-title">Choose Category</h2>
+                    </div>
+                    
+                    <div class="categories-grid" id="categories-container">
+                        <div class="category-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Loading categories...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <button type="button" class="btn btn-primary" id="next-to-topics" disabled>
+                            Next: Select Topic
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="setup-step" id="step-2">
+                    <div class="step-header">
+                        <span class="step-number">2</span>
+                        <h2 class="step-title">Select Topic</h2>
+                    </div>
+                    
+                    <div class="topics-container" id="topics-container">
+                        <div class="topics-loading hidden" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Loading topics...</span>
+                        </div>
+                        <div class="topics-grid" id="topics-grid" style="opacity: 1; visibility: visible;">
+                            </div>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <button type="button" class="btn btn-outline" id="back-to-categories">
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </button>
+                        <button type="button" class="btn btn-primary" id="next-to-settings" disabled>
+                            Next: Configure
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="setup-step" id="step-3">
+                    <div class="step-header">
+                        <span class="step-number">3</span>
+                        <h2 class="step-title">Debate Settings</h2>
+                    </div>
+                    
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <label class="setting-label">
+                                <i class="fas fa-graduation-cap"></i>
+                                Difficulty Level
+                            </label>
+                            <div class="difficulty-options">
+                                <div class="difficulty-card" data-difficulty="easy">
+                                    <div class="difficulty-icon">
+                                        <i class="fas fa-seedling"></i>
+                                    </div>
+                                    <h3>Easy</h3>
+                                    <p>60s reply time</p>
+                                    <span class="difficulty-desc">Gentle arguments, basic reasoning</span>
+                                </div>
+                                <div class="difficulty-card" data-difficulty="medium">
+                                    <div class="difficulty-icon">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                    <h3>Medium</h3>
+                                    <p>45s reply time</p>
+                                    <span class="difficulty-desc">Balanced debate, moderate complexity</span>
+                                </div>
+                                <div class="difficulty-card" data-difficulty="hard">
+                                    <div class="difficulty-icon">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <h3>Hard</h3>
+                                    <p>30s reply time</p>
+                                    <span class="difficulty-desc">Complex arguments, quick thinking</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <label class="setting-label">
+                                <i class="fas fa-clock"></i>
+                                Total Debate Time
+                            </label>
+                            <div class="time-options">
+                                <div class="time-card" data-time="5">
+                                    <span class="time-value">5</span>
+                                    <span class="time-unit">minutes</span>
+                                    <span class="time-desc">Quick Round</span>
+                                </div>
+                                <div class="time-card selected" data-time="10">
+                                    <span class="time-value">10</span>
+                                    <span class="time-unit">minutes</span>
+                                    <span class="time-desc">Standard</span>
+                                </div>
+                                <div class="time-card" data-time="15">
+                                    <span class="time-value">15</span>
+                                    <span class="time-unit">minutes</span>
+                                    <span class="time-desc">Extended</span>
+                                </div>
+                                <div class="time-card" data-time="20">
+                                    <span class="time-value">20</span>
+                                    <span class="time-unit">minutes</span>
+                                    <span class="time-desc">Marathon</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-navigation">
+                        <button type="button" class="btn btn-outline" id="back-to-topics">
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </button>
+                        <button type="button" class="btn btn-primary btn-lg" id="start-debate">
+                            <i class="fas fa-play"></i>
+                            Start Debate
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-steps">
+                    <div class="progress-step active">1</div>
+                    <div class="progress-step">2</div>
+                    <div class="progress-step">3</div>
+                </div>
+            </div>
+        </div>
+
+        {% if not user.is_authenticated %}
+        <div class="modal" id="guest-warning-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Free Trial Debate</h3>
+                </div>
+                <div class="modal-body">
+                    <p>You're about to start your <strong>one free trial debate</strong> as a guest.</p>
+                    <p>After this debate, you'll need to register to continue debating and save your progress.</p>
+                    <div class="trial-features">
+                        <div class="feature">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span>Full debate experience</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-times text-red-400"></i>
+                            <span>No progress saving</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-times text-red-400"></i>
+                            <span>No debate history</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="register-instead">
+                        <i class="fas fa-user-plus"></i>
+                        Register Instead
+                    </button>
+                    <button type="button" class="btn btn-primary" id="continue-as-guest">
+                        Continue as Guest
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="modal hidden" id="loading-modal">
+            <div class="modal-content loading-content">
+                <div class="loading-spinner">
+                    <i class="fas fa-brain fa-spin"></i>
+                </div>
+                <h3>Preparing Your Debate</h3>
+                <p>Setting up the arena for intellectual combat...</p>
+                <div class="loading-progress">
+                    <div class="loading-bar">
+                        <div class="loading-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/debate_setup.js' %}"></script>
+<script>
+    window.isAuthenticated = "{{ user.is_authenticated|yesno:'true,false' }}";
+    window.csrfToken = '{{ csrf_token }}';
+</script>
+{% endblock %}

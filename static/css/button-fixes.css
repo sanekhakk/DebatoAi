@@ -1,0 +1,308 @@
+.btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    border-radius: 12px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+    white-space: nowrap !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+}
+
+.btn:not(:disabled) {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.btn:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3) !important;
+}
+
+.btn-outline {
+    background: transparent !important;
+    color: #6366f1 !important;
+    border: 2px solid #6366f1 !important;
+}
+
+.btn-outline:hover:not(:disabled) {
+    background: #6366f1 !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%) !important;
+    color: white !important;
+}
+
+.btn-lg {
+    padding: 1rem 2rem !important;
+    font-size: 1.125rem !important;
+}
+
+/* START DEBATE BUTTON SPECIFIC FIXES */
+#start-debate-btn {
+    min-width: 200px !important;
+    height: 60px !important;
+    font-size: 1.125rem !important;
+    font-weight: 700 !important;
+    margin: 2rem auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.75rem !important;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3) !important;
+    border-radius: 16px !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+#start-debate-btn:hover:not(:disabled) {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4) !important;
+}
+
+#start-debate-btn:active:not(:disabled) {
+    transform: translateY(-1px) !important;
+}
+
+#start-debate-btn:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* SEND BUTTON FIXES */
+#send-btn {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 0.75rem 1.5rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    min-width: 100px !important;
+    height: 45px !important;
+}
+
+#send-btn:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3) !important;
+}
+
+#send-btn:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    background: #6b7280 !important;
+}
+
+/* INPUT FIELD FIXES */
+#message-input {
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    color: #f8fafc !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    resize: vertical !important;
+    min-height: 80px !important;
+    max-height: 200px !important;
+    transition: all 0.3s ease !important;
+    outline: none !important;
+}
+
+#message-input:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+#message-input:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+#message-input::placeholder {
+    color: #64748b !important;
+    opacity: 1 !important;
+}
+
+/* ACTION BUTTONS FIXES */
+#give-up-btn, #pause-btn {
+    min-width: 100px !important;
+    height: 40px !important;
+    font-size: 0.875rem !important;
+}
+
+/* NAVIGATION BUTTON FIXES FOR DEBATE SETUP */
+#next-to-topics, #next-to-settings, #back-to-categories, #back-to-topics {
+    min-width: 150px !important;
+    height: 45px !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+/* MODAL BUTTON FIXES */
+.modal-actions .btn {
+    min-width: 120px !important;
+    height: 45px !important;
+    font-weight: 600 !important;
+}
+
+/* SUGGESTION BUTTON FIXES */
+.suggestion-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem !important;
+    color: #cbd5e1 !important;
+    font-size: 0.875rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    white-space: nowrap !important;
+}
+
+.suggestion-btn:hover {
+    background: rgba(99, 102, 241, 0.1) !important;
+    border-color: #6366f1 !important;
+    color: #f8fafc !important;
+    transform: translateY(-2px) !important;
+}
+
+/* CATEGORY AND TOPIC CARD FIXES */
+.category-card, .topic-card {
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    border-radius: 16px !important;
+    position: relative !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+}
+
+.category-card:hover, .topic-card:hover {
+    transform: translateY(-5px) !important;
+    cursor: pointer !important;
+}
+
+.category-card.selected, .topic-card.selected {
+    border-color: #6366f1 !important;
+    background: rgba(99, 102, 241, 0.15) !important;
+    transform: translateY(-5px) !important;
+}
+
+.difficulty-card, .time-card {
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}
+
+.difficulty-card:hover, .time-card:hover {
+    transform: translateY(-3px) !important;
+    cursor: pointer !important;
+}
+
+.difficulty-card.selected, .time-card.selected {
+    border-color: #6366f1 !important;
+    background: rgba(99, 102, 241, 0.1) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* FORCE POINTER EVENTS */
+.btn, .category-card, .topic-card, .difficulty-card, .time-card, .suggestion-btn {
+    pointer-events: auto !important;
+}
+
+.btn:disabled, #message-input:disabled {
+    pointer-events: none !important;
+}
+
+/* ENSURE CLICK EVENTS WORK */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button, .btn, .category-card, .topic-card, .difficulty-card, .time-card {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    touch-action: manipulation !important;
+}
+
+/* RESPONSIVE FIXES */
+@media (max-width: 768px) {
+    .btn {
+        padding: 0.75rem 1rem !important;
+        font-size: 0.875rem !important;
+        min-height: 44px !important; /* iOS touch target minimum */
+    }
+    
+    .btn-lg {
+        padding: 1rem 1.5rem !important;
+        font-size: 1rem !important;
+        min-height: 48px !important;
+    }
+    
+    #start-debate-btn {
+        width: 100% !important;
+        max-width: 280px !important;
+        height: 56px !important;
+    }
+    
+    #send-btn {
+        width: 100% !important;
+        min-width: 80px !important;
+        height: 44px !important;
+    }
+}

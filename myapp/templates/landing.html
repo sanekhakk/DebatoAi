@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Debato - Debate Smarter with AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section" id="hero">
+    <div class="hero-background">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+    </div>
+    
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i>
+                <span>AI-Powered Debate Training</span>
+            </div>
+            
+            <h1 class="hero-title">
+                Debate Smarter<br>
+                <span class="gradient-text">With Debato</span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                Your AI debate partner for sharper arguments
+            </p>
+            
+            <p class="hero-description">
+                Challenge yourself against advanced AI in structured debates. 
+                Improve your critical thinking, argumentation skills, and confidence 
+                in discussions that matter.
+            </p>
+            
+            <div class="hero-cta">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'debate_setup' %}" class="cta-button">
+                        <i class="fas fa-comments cta-icon"></i>
+                        <span>Start Debating Now</span>
+                    </a>
+                {% else %}
+                    <a href="{% url 'debate_setup' %}" class="cta-button" id="guest-start-debate">
+                        <i class="fas fa-comments cta-icon"></i>
+                        <span>Try Free Debate</span>
+                    </a>
+                {% endif %}
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ total_debates }}</span>
+                        <span class="stat-label">Debates Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ active_users }}</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ topics_count }}</span>
+                        <span class="stat-label">Topics Available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features-section" id="features">
+    <div class="features-container">
+        <div class="features-header">
+            <h2 class="features-title">Why Choose Debato?</h2>
+            <p class="features-subtitle">
+                Experience the future of debate training with our AI-powered platform 
+                designed to enhance your argumentative skills.
+            </p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="feature-title">Advanced AI Opponent</h3>
+                <p class="feature-description">
+                    Debate against sophisticated AI that adapts to your skill level 
+                    and challenges you with intelligent counterarguments.
+                </p>
+                <span class="feature-badge">Smart AI</span>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">
+                    <i class="fas fa-stopwatch"></i>
+                </div>
+                <h3 class="feature-title">Timed Challenges</h3>
+                <p class="feature-description">
+                    Practice thinking on your feet with customizable time limits 
+                    that simulate real debate conditions.
+                </p>
+                <span class="feature-badge">Real-Time</span>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="feature-title">Track Progress</h3>
+                <p class="feature-description">
+                    Monitor your improvement with detailed statistics, win rates, 
+                    and performance analytics over time.
+                </p>
+                <span class="feature-badge">Analytics</span>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="feature-title">Multiple Topics</h3>
+                <p class="feature-description">
+                    Choose from diverse categories including technology, politics, 
+                    ethics, and current events to expand your knowledge.
+                </p>
+                <span class="feature-badge">50+ Topics</span>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="feature-title">Difficulty Levels</h3>
+                <p class="feature-description">
+                    Progress from beginner to expert with three difficulty levels 
+                    that match your debating experience.
+                </p>
+                <span class="feature-badge">Adaptive</span>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="feature-title">Anywhere Access</h3>
+                <p class="feature-description">
+                    Debate on any device with our responsive design that works 
+                    seamlessly on desktop, tablet, and mobile.
+                </p>
+                <span class="feature-badge">Mobile Ready</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="how-it-works-section" id="how-it-works">
+    <div class="steps-container">
+        <div class="steps-header">
+            <h2 class="steps-title">How Debato Works</h2>
+            <p class="features-subtitle">
+                Get started in minutes with our simple three-step process
+            </p>
+        </div>
+        
+        <div class="steps-grid">
+            <div class="step-card" data-aos="fade-right" data-aos-delay="100">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Choose Your Topic</h3>
+                <p class="step-description">
+                    Select from over 50 debate topics across multiple categories 
+                    and set your difficulty level and time preferences.
+                </p>
+            </div>
+            
+            <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Engage in Debate</h3>
+                <p class="step-description">
+                    Present your arguments and respond to AI counterpoints in 
+                    real-time within your chosen time limits.
+                </p>
+            </div>
+            
+            <div class="step-card" data-aos="fade-left" data-aos-delay="300">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Track & Improve</h3>
+                <p class="step-description">
+                    Review your performance, analyze your win rate, and 
+                    continuously improve your debating skills.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
