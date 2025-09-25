@@ -24,7 +24,7 @@
 }
 
 .topic-card .topic-difficulty,
-.topic-card .topic-title + * { 
+.topic-card .topic-title + * {
     display: none;
 }
 
@@ -56,20 +56,20 @@
         <div class="setup-form-container">
             <form id="debate-setup-form" class="setup-form">
                 {% csrf_token %}
-                
+
                 <div class="setup-step active" id="step-1">
                     <div class="step-header">
                         <span class="step-number">1</span>
                         <h2 class="step-title">Choose Category</h2>
                     </div>
-                    
+
                     <div class="categories-grid" id="categories-container">
                         <div class="category-loading">
                             <i class="fas fa-spinner fa-spin"></i>
                             <span>Loading categories...</span>
                         </div>
                     </div>
-                    
+
                     <div class="step-navigation">
                         <button type="button" class="btn btn-primary" id="next-to-topics" disabled>
                             Next: Select Topic
@@ -83,7 +83,7 @@
                         <span class="step-number">2</span>
                         <h2 class="step-title">Select Topic</h2>
                     </div>
-                    
+
                     <div class="topics-container" id="topics-container">
                         <div class="topics-loading hidden" style="display: none;">
                             <i class="fas fa-spinner fa-spin"></i>
@@ -92,7 +92,7 @@
                         <div class="topics-grid" id="topics-grid" style="opacity: 1; visibility: visible;">
                             </div>
                     </div>
-                    
+
                     <div class="step-navigation">
                         <button type="button" class="btn btn-outline" id="back-to-categories">
                             <i class="fas fa-arrow-left"></i>
@@ -110,7 +110,7 @@
                         <span class="step-number">3</span>
                         <h2 class="step-title">Debate Settings</h2>
                     </div>
-                    
+
                     <div class="settings-grid">
                         <div class="setting-group">
                             <label class="setting-label">
@@ -123,7 +123,7 @@
                                         <i class="fas fa-seedling"></i>
                                     </div>
                                     <h3>Easy</h3>
-                                    <p>60s reply time</p>
+                                    <p>75s reply time</p>
                                     <span class="difficulty-desc">Gentle arguments, basic reasoning</span>
                                 </div>
                                 <div class="difficulty-card" data-difficulty="medium">
@@ -131,7 +131,7 @@
                                         <i class="fas fa-fire"></i>
                                     </div>
                                     <h3>Medium</h3>
-                                    <p>45s reply time</p>
+                                    <p>60s reply time</p>
                                     <span class="difficulty-desc">Balanced debate, moderate complexity</span>
                                 </div>
                                 <div class="difficulty-card" data-difficulty="hard">
@@ -139,7 +139,7 @@
                                         <i class="fas fa-brain"></i>
                                     </div>
                                     <h3>Hard</h3>
-                                    <p>30s reply time</p>
+                                    <p>45s reply time</p>
                                     <span class="difficulty-desc">Complex arguments, quick thinking</span>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="step-navigation">
                         <button type="button" class="btn btn-outline" id="back-to-topics">
                             <i class="fas fa-arrow-left"></i>
