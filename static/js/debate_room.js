@@ -1,6 +1,6 @@
 class DebateRoom {
     constructor() {
-        //DATA INITIALIZATION ---
+        //DATA INITIALIZATION 
         const debateDataElement = document.getElementById('debate-data');
         if (!debateDataElement) {
             console.error("Critical Error: Debate data script tag not found.");
@@ -8,7 +8,7 @@ class DebateRoom {
         }
         this.debate = JSON.parse(debateDataElement.textContent);
         this.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        this.isAuthenticated = window.isAuthenticated === 'true'; // Check authentication status
+        this.isAuthenticated = window.isAuthenticated === 'true'; 
 
         //TIMER STATE
         this.mainTimerInterval = null;
@@ -130,7 +130,6 @@ class DebateRoom {
             body: JSON.stringify({ action: 'end', winner: winner }),
         });
 
-        // *** MODIFIED LOGIC HERE ***
         if (this.isAuthenticated) {
             // If user is logged in, redirect to dashboard
             alert(`Debate Over! Winner: ${winner.toUpperCase()}`);

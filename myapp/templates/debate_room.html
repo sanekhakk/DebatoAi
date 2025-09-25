@@ -97,5 +97,10 @@
 {% endblock %}
 
 {% block extra_js %}
+<script>
+    // *** THIS IS THE FIX ***
+    // Pass authentication status from Django to JavaScript
+    window.isAuthenticated = "{{ user.is_authenticated|yesno:'true,false' }}";
+</script>
 <script src="{% static 'js/debate_room.js' %}" defer></script>
 {% endblock %}
