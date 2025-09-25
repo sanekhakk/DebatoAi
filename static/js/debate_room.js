@@ -8,6 +8,7 @@ class DebateRoom {
         }
         this.debate = JSON.parse(debateDataElement.textContent);
         this.csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        this.isAuthenticated = window.isAuthenticated === 'true'; // Check authentication status
 
         //TIMER STATE
         this.mainTimerInterval = null;
@@ -19,13 +20,14 @@ class DebateRoom {
         this.elements = {
             startButton: document.getElementById('start-debate-btn'),
             sendButton: document.getElementById('send-btn'),
-            giveUpButton: document.getElementById('give-up-btn'), // <-- ADDED
+            giveUpButton: document.getElementById('give-up-btn'),
             messageInput: document.getElementById('message-input'),
             messagesContainer: document.getElementById('messages-container'),
             welcomeMessage: document.getElementById('welcome-message'),
             typingIndicator: document.getElementById('typing-indicator'),
             mainTimerDisplay: document.getElementById('main-timer-display'),
             replyTimerDisplay: document.getElementById('reply-timer-display'),
+            guestModal: document.getElementById('guest-trial-ended-modal'), // New modal element
         };
 
         this.initialize();
@@ -128,8 +130,17 @@ class DebateRoom {
             body: JSON.stringify({ action: 'end', winner: winner }),
         });
 
-        alert(`Debate Over! Winner: ${winner.toUpperCase()}`);
-        window.location.href = '/dashboard/';
+        // *** MODIFIED LOGIC HERE ***
+        if (this.isAuthenticated) {
+            // If user is logged in, redirect to dashboard
+            alert(`Debate Over! Winner: ${winner.toUpperCase()}`);
+            window.location.href = '/dashboard/';
+        } else {
+            // If user is a guest, show the trial ended modal
+            if (this.elements.guestModal) {
+                this.elements.guestModal.classList.remove('hidden');
+            }
+        }
     }
 
     //TIMER MANAGEMENT

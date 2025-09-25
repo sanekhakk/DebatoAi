@@ -74,6 +74,25 @@
     </div>
 </section>
 
+<div class="modal hidden" id="guest-trial-ended-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="result-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h3>Free Trial Complete!</h3>
+        </div>
+        <div class="modal-body">
+            <p>You've completed your one free trial debate. We hope you enjoyed the challenge!</p>
+            <p>To continue debating, track your progress, and unlock more features, please create an account or log in.</p>
+        </div>
+        <div class="modal-actions">
+            <a href="{% url 'login_page' %}" class="btn btn-outline">Login</a>
+            <a href="{% url 'register_page' %}" class="btn btn-primary">Register for Free</a>
+        </div>
+    </div>
+</div>
+
 {{ debate_data|json_script:"debate-data" }}
 {% endblock %}
 
