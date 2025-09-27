@@ -20,8 +20,8 @@ class DebateAIService:
             
             genai.configure(api_key=api_key)
             
-            self.model = genai.GenerativeModel(model_name="text-bison-001")
-            print("--- Google Gemini AI Service Initialized Successfully with model: text-bison-001 ---")
+            self.model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
+            print("--- Google Gemini AI Service Initialized Successfully with model: gemini-1.5-flash-latest ---")
 
 
         except Exception as e:
